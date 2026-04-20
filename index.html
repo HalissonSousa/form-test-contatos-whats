@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rafael Lima — Descubra seu próximo passo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0a0a0a;font-family:Arial,sans-serif;color:#fff}
+.screen{display:none;min-height:100vh;padding:2.5rem 1.5rem;max-width:480px;margin:0 auto;flex-direction:column;justify-content:center}
+.screen.active{display:flex}
+.logo{font-size:12px;font-weight:700;color:#FF6B00;letter-spacing:.12em;margin-bottom:2rem;text-align:center;text-transform:uppercase}
+.progress-bar{width:100%;height:3px;background:#1e1e1e;border-radius:2px;margin-bottom:2rem}
+.progress-fill{height:3px;background:#FF6B00;border-radius:2px;transition:width .4s ease}
+h1{font-size:26px;font-weight:700;line-height:1.35;margin-bottom:.6rem;color:#fff}
+h2{font-size:20px;font-weight:700;line-height:1.4;margin-bottom:.5rem;color:#fff}
+.subtitle{font-size:14px;color:#777;margin-bottom:2rem;line-height:1.6}
+.option{background:#111;border:1.5px solid #222;border-radius:12px;padding:1rem 1.2rem;margin-bottom:.65rem;cursor:pointer;transition:border-color .2s,background .2s;font-size:15px;color:#ccc;line-height:1.4;display:flex;align-items:center;gap:.6rem}
+.option:hover{border-color:#FF6B00;background:#150f03;color:#fff}
+.option.selected{border-color:#FF6B00;background:#150f03;color:#fff}
+.option-emoji{font-size:18px;flex-shrink:0}
+.btn{width:100%;background:#FF6B00;color:#fff;border:none;border-radius:12px;padding:1rem 1.5rem;font-size:16px;font-weight:700;cursor:pointer;margin-top:1rem;transition:background .2s,opacity .2s;opacity:.35;pointer-events:none}
+.btn.ready{opacity:1;pointer-events:all}
+.btn.ready:hover{background:#e05c00}
+.hint{font-size:11px;color:#333;text-align:center;margin-top:.75rem;line-height:1.5}
+.step-label{font-size:11px;color:#444;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
+.result-tag{display:inline-block;background:#FF6B00;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:6px;margin-bottom:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.result-icon{font-size:40px;margin-bottom:1rem;display:block}
+.result-title{font-size:21px;font-weight:700;color:#fff;margin-bottom:.6rem;line-height:1.3}
+.result-desc{font-size:14px;color:#999;line-height:1.7;margin-bottom:1.25rem}
+.result-price{font-size:26px;font-weight:700;color:#FF6B00;margin-bottom:.25rem}
+.result-price-label{font-size:12px;color:#555;margin-bottom:1.5rem}
+.result-card{background:#111;border:1.5px solid #FF6B00;border-radius:16px;padding:1.75rem 1.5rem;margin-bottom:1rem}
+.btn-cta{display:block;width:100%;background:#FF6B00;color:#fff;border:none;border-radius:12px;padding:1.1rem;font-size:16px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;transition:background .2s}
+.btn-cta:hover{background:#e05c00}
+.welcome-badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.75rem}
+.badge{background:#161616;border:1px solid #2a2a2a;border-radius:20px;padding:.3rem .75rem;font-size:12px;color:#777}
+</style>
+</head>
+<body>
+<div id="app">
+
+<div class="screen active" id="s-welcome">
+  <div class="logo">Rafael Lima — Dropshipping</div>
+  <div class="welcome-badges">
+    <span class="badge">+30 mil vidas transformadas</span>
+    <span class="badge">+310 mi faturados</span>
+    <span class="badge">1 década no mercado</span>
+  </div>
+  <h1>Você está a 2 minutos de descobrir seu próximo passo no mercado digital.</h1>
+  <p class="subtitle">Responda 6 perguntas rápidas e vamos montar juntos o caminho ideal para você começar — ou escalar — suas vendas online sem estoque.</p>
+  <button class="btn ready" onclick="show('s-q1')">Descobrir meu caminho agora →</button>
+  <p class="hint">Rápido, gratuito e personalizado para o seu momento</p>
+</div>
+
+<div class="screen" id="s-q1">
+  <div class="logo">Rafael Lima — Dropshipping</div>
+  <div class="progress-bar"><div class="progress-fill" style="width:16%"></div></div>
+  <div class="step-label">Pergunta 1 de 6</div>
+  <h2>Como você se descreve hoje?</h2>
+  <p class="subtitle">Quero entender seu ponto de partida.</p>
+  <div class="option" onclick="sel('q1','clt',this)"><span class="option-emoji">💼</span>Ainda sou CLT / funcionário</div>
+  <div class="option" onclick="sel('q1','empreende',this)"><span class="option-emoji">🚀</span>Já empreendo mas quero escalar</div>
+  <div class="option" onclick="sel('q1','transicao',this)"><span class="option-emoji">🔄</span>Estou em transição de carreira</div>
+  <div class="option" onclick="sel('q1','online',this)"><span class="option-emoji">💻</span>Já vendo online e quero melhorar</div>
+  <button class="btn" id="next-q1" onclick="go('s-q2','q1')">Próximo →</button>
+</div>
+
+<div class="screen" id="s-q2">
+  <div class="logo">Rafael Lima — Dropshipping</div>
+  <div class="progress-bar"><div class="progress-fill" style="width:32%"></div></div>
+  <div class="step-label">Pergunta 2 de 6</div>
+  <h2>Qual é a sua relação com vendas online hoje?</h2>
+  <p class="subtitle">Sem julgamento — só quero entender seu histórico.</p>
+  <div class="option" onclick="sel('q2','zero',this)"><span class="option-emoji">🌱</span>Nunca tentei, mas tenho curiosidade</div>
+  <div class="option" onclick="sel('q2','tentou',this)"><span class="option-emoji">💪</span>Já tentei mas não tive resultado</div>
+  <div class="option" onclick="sel('q2','vende',this)"><span class="option-emoji">📈</span>Já vendo, mas quero escalar mais</div>
+  <div class="option" onclick="sel('q2','conhece',this)"><span class="option-emoji">🏆</span>Conheço bem o mercado</div>
+  <button class="btn" id="next-q2" onclick="go('s-q3','q2')">Próximo →</button>
+</div>
+
+<div class="screen" id="s-q3">
+  <div class="logo">Rafael Lima — Dropshipping</div>
+  <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
+  <div class="step-label">Pergunta 3 de 6</div>
+  <h2>Você já investiu em algum curso ou mentoria?</h2>
+  <p class="subtitle">Isso me ajuda a entender o que já passou pela sua cabeça.</p>
+  <div class="option" onclick="sel('q3','nao',this)"><span class="option-emoji">🙅</span>Nunca comprei nada até hoje</div>
+  <div class="option" onclick="sel('q3','nao-aplicou',this)"><span class="option-emoji">📦</span>Já comprei mas não cheguei a aplicar</div>
+  <div class="option" onclick="sel('q3','sem-resultado',this)"><span class="option-emoji">😤</span>Comprei, apliquei, mas sem resultado real</div>
+  <div class="option" onclick="sel('q3','resultado',this)"><span class="option-emoji">✅</span>Já tive resultados com algum método</div>
+  <button class="btn" id="next-q3" onclick="go('s-q4','q3')">Próximo →</button>
+</div>
+
+<div class="screen" id="s-q4">
+  <div class="logo">Rafael Lima — Dropshipping</div>
+  <div class="progress-bar"><div class="progress-fill" style="width:64%"></div></div>
+  <div class="step-label">Pergunta 4 de 6</div>
+  <h2>Com o método certo, você acredita que conseguiria faturar R$&nbsp;5.000/mês em até 6 meses?</h2>
+  <p class="subtitle">Seja honesto — essa é a pergunta mais importante.</p>
+  <div class="option" onclick="sel('q4','sim',this)"><span class="option-emoji">🔥</span>Sim, tenho certeza</div>
+  <div class="option" onclick="sel('q4','acredita',this)"><span class="option-emoji">🤔</span>Acredito que sim, mas ainda tenho dúvidas</div>
+  <div class="option" onclick="sel('q4','nao-sabe',this)"><span class="option-emoji">😐</span>Não sei, nunca coloquei isso em prática</div>
+  <div class="option" onclick="sel('q4','dificuldade',this)"><span class="option-emoji">😟</span>Tenho dificuldade de acreditar nisso</div>
+  <button class="btn" id="next-q4" onclick="go('s-q5','q4')">Próximo →</button>
+</div>
+
+<div class="screen" id="s-q5">
+  <div class="logo">Rafael Lima — Dropshipping</div>
+  <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+  <div class="step-label">Pergunta 5 de 6</div>
+  <h2>Qual é a sua renda mensal aproximada hoje?</h2>
+  <p class="subtitle">Só para entender melhor o seu momento atual.</p>
+  <div class="option" onclick="sel('q5','ate2k',this)"><span class="option-emoji">💰</span>Até R$ 2.000</div>
+  <div class="option" onclick="sel('q5','2k-4k',this)"><span class="option-emoji">💰</span>Entre R$ 2.000 e R$ 4.000</div>
+  <div class="option" onclick="sel('q5','4k-8k',this)"><span class="option-emoji">💰</span>Entre R$ 4.000 e R$ 8.000</div>
+  <div class="option" onclick="sel('q5','mais8k',this)"><span class="option-emoji">💰</span>Acima de R$ 8.000</div>
+  <button class="btn" id="next-q5" onclick="go('s-q6','q5')">Próximo →</button>
+</div>
+
+<div class="screen" id="s-q6">
+  <div class="logo">Rafael Lima — Dropshipping</div>
+  <div class="progress-bar"><div class="progress-fill" style="width:96%"></div></div>
+  <div class="step-label">Pergunta 6 de 6 — última!</div>
+  <h2>Quanto você estaria disposto a investir agora para mudar sua situação financeira?</h2>
+  <p class="subtitle">Sem compromisso — só quero te direcionar para o melhor caminho.</p>
+  <div class="option" onclick="sel('q6','ate100',this)"><span class="option-emoji">🎯</span>Até R$ 100 — quero começar com o pé no chão</div>
+  <div class="option" onclick="sel('q6','100-500',this)"><span class="option-emoji">🎯</span>Entre R$ 100 e R$ 500 — tenho essa reserva</div>
+  <div class="option" onclick="sel('q6','500-1k',this)"><span class="option-emoji">🎯</span>Entre R$ 500 e R$ 1.000 — estou pronto</div>
+  <div class="option" onclick="sel('q6','mais1k',this)"><span class="option-emoji">🎯</span>Acima de R$ 1.000 — quero o caminho completo</div>
+  <button class="btn" id="next-q6" onclick="calcResult()">Ver meu resultado personalizado →</button>
+</div>
+
+<div class="screen" id="s-result">
+  <div class="logo">Rafael Lima — Dropshipping</div>
+  <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+  <p style="font-size:14px;color:#FF6B00;font-weight:700;margin-bottom:1.25rem;line-height:1.5" id="result-greeting"></p>
+  <div class="result-card">
+    <span class="result-icon" id="r-icon"></span>
+    <span class="result-tag" id="r-tag"></span>
+    <div class="result-title" id="r-title"></div>
+    <div class="result-desc" id="r-desc"></div>
+    <div class="result-price" id="r-price"></div>
+    <div class="result-price-label" id="r-label"></div>
+    <a class="btn-cta" id="r-cta" href="#" target="_blank"></a>
+  </div>
+  <p class="hint">Recomendação personalizada com base nas suas respostas.<br>Método Rafael Lima — Dropshipping.</p>
+</div>
+
+</div>
+<script>
+var A={};
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function sel(q,val,el){
+  A[q]=val;
+  el.parentElement.querySelectorAll('.option').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected');
+  var btn=document.getElementById('next-'+q);
+  if(btn) btn.className='btn ready';
+}
+
+function go(target,req){
+  if(!A[req])return;
+  show(target);
+}
+
+function calcResult(){
+  if(!A['q6'])return;
+
+  var inv=A['q6'];
+  var crenca=A['q4'];
+  var hist=A['q2'];
+  var curso=A['q3'];
+
+  // Lógica principal: investimento define rota base
+  var rota=1;
+  if(inv==='mais1k'||inv==='500-1k') rota=3;
+  else if(inv==='100-500') rota=2;
+  else rota=1;
+
+  // Ajuste para baixo: crença baixa reduz rota
+  if(crenca==='dificuldade'&&rota>1) rota--;
+
+  // Ajuste para cima: já vende ou conhece mercado eleva rota
+  if((hist==='vende'||hist==='conhece')&&rota<3) rota++;
+
+  // Ajuste para cima: já teve resultado com método vai para o mais completo
+  if(curso==='resultado'&&rota<3) rota++;
+  if(rota>3) rota=3;
+
+  var greeting=document.getElementById('result-greeting');
+  greeting.textContent='Analisei suas respostas com cuidado. Com base no seu perfil, este é o caminho que faz mais sentido para você agora:';
+
+  var icon=document.getElementById('r-icon');
+  var tag=document.getElementById('r-tag');
+  var title=document.getElementById('r-title');
+  var desc=document.getElementById('r-desc');
+  var price=document.getElementById('r-price');
+  var label=document.getElementById('r-label');
+  var cta=document.getElementById('r-cta');
+
+  if(rota===1){
+    icon.textContent='🚀';
+    tag.textContent='Porta de entrada perfeita';
+    title.textContent='Sua primeira loja pronta com Inteligência Artificial';
+    desc.textContent='Você está no momento certo de dar o primeiro passo — sem risco, sem complicação. Com o DropAI, você tem uma loja montada por IA em minutos, pronta para vender. É o começo mais inteligente que existe para quem quer entrar no mercado digital sem precisar saber nada de tecnologia. Mais de 30 mil pessoas já transformaram suas vidas com o método do Rafael — e tudo começou com um único passo.';
+    price.textContent='R$ 9,99';
+    label.textContent='Acesso imediato — sem mensalidade';
+    cta.href='https://rafaellimadigital.com/dropai/';
+    cta.textContent='Quero minha loja com IA agora →';
+  } else if(rota===2){
+    icon.textContent='📈';
+    tag.textContent='Método completo do zero';
+    title.textContent='O Plano Prático — do zero ao primeiro faturamento';
+    desc.textContent='Você já tem o interesse e a disposição. O que faltou até agora foi um método real e direto ao ponto. O Plano Prático do Rafael vai te mostrar, passo a passo, como montar sua operação, escolher produtos e começar a vender — sem enrolação, sem precisar de experiência anterior e sem investir alto em tráfego para começar.';
+    price.textContent='R$ 87,90';
+    label.textContent='Acesso vitalício + atualizações incluídas';
+    cta.href='https://rafaellimadigital.com/o-plano-pratico/';
+    cta.textContent='Quero o Plano Prático agora →';
+  } else {
+    icon.textContent='🏆';
+    tag.textContent='Transformação completa';
+    title.textContent='ABC do DROP — a operação profissional que você está pronto para ter';
+    desc.textContent='Suas respostas mostram que você não está procurando um cursinho. Você quer construir uma operação real, com método, fornecedores, loja estruturada e estratégia de tráfego. O ABC do DROP é o treinamento mais completo do Rafael — do básico ao avançado — feito para quem está no seu estágio e quer resultado de verdade.';
+    price.textContent='R$ 697,90';
+    label.textContent='Curso completo + bônus exclusivos';
+    cta.href='https://rafaellimadigital.com/abcdodrop-mentoring/';
+    cta.textContent='Quero o ABC do DROP agora →';
+  }
+
+  show('s-result');
+}
+</script>
+</body>
+</html>
